@@ -11,6 +11,8 @@ import com.example.android.cdocs.R;
 import com.example.android.cdocs.databinding.ActivityLoginBinding;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterAuthToken;
+import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 
@@ -26,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
         mLoginActivityBinging.btnTwitterLogin.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
+                TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
+                TwitterAuthToken authToken = session.getAuthToken();
+                String token = authToken.token;
+                String userName = session.getUserName();
                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
             }
 
