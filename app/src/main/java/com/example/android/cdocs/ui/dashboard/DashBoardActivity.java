@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.cdocs.R;
 import com.example.android.cdocs.databinding.ActivityDashBoardBinding;
+import com.example.android.cdocs.utils.IConstants;
 
 public class DashBoardActivity extends AppCompatActivity {
     ActivityDashBoardBinding activityDashBoardBinding;
@@ -15,5 +16,11 @@ public class DashBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityDashBoardBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_dash_board);
+
+        if (getIntent() != null) {
+            activityDashBoardBinding
+                    .tvUserId
+                    .setText(getIntent().getStringExtra(IConstants.Login.KEY_USER_NAME));
+        }
     }
 }

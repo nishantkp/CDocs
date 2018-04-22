@@ -5,10 +5,11 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.android.cdocs.R;
 import com.example.android.cdocs.databinding.ActivityLoginBinding;
+import com.example.android.cdocs.ui.dashboard.DashBoardActivity;
+import com.example.android.cdocs.utils.IConstants;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterAuthToken;
@@ -32,7 +33,10 @@ public class LoginActivity extends AppCompatActivity {
                 TwitterAuthToken authToken = session.getAuthToken();
                 String token = authToken.token;
                 String userName = session.getUserName();
-                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                Intent dashBoardIntent = new Intent(LoginActivity.this, DashBoardActivity.class);
+                dashBoardIntent.putExtra(IConstants.Login.KEY_USER_NAME, userName);
+                dashBoardIntent.putExtra(IConstants.Login.KEY_TOKEN, token);
+                startActivity(dashBoardIntent);
             }
 
             @Override
