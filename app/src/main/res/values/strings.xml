@@ -3,4 +3,5 @@
     <!-- API Keys Twitter -->
     <string name="com.twitter.sdk.android.CONSUMER_KEY">tMcTNiVEiue6jSaiVs89apdez</string>
     <string name="com.twitter.sdk.android.CONSUMER_SECRET">uWClm5HieWgbxb1qVh2pNuE4Ff22jh3uoWJ1mbCK24Afbm5wUJ</string>
+    <string name="dashboard_label">Dashboard</string>
 </resources>
