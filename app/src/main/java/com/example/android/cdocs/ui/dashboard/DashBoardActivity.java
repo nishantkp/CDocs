@@ -1,9 +1,13 @@
 package com.example.android.cdocs.ui.dashboard;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import com.example.android.cdocs.R;
@@ -45,6 +49,7 @@ public class DashBoardActivity extends AppCompatActivity
                 , false);
         activityDashBoardBinding.rvDocs.setLayoutManager(layoutManager);
         activityDashBoardBinding.rvDocs.setAdapter(new DocsAdapter(this, list));
+        runLayoutAnimation(activityDashBoardBinding.rvDocs);
     }
 
     @Override
@@ -53,5 +58,16 @@ public class DashBoardActivity extends AppCompatActivity
                 "Position : " + position + "Docs : " + item.getTitle(),
                 Toast.LENGTH_SHORT)
                 .show();
+    }
+
+    // Adds fall down layout animation to RecyclerView items
+    private void runLayoutAnimation(final RecyclerView recyclerView) {
+        final Context context = recyclerView.getContext();
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(context, R.anim.layout_anim_fall_down);
+
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 }
