@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.Toast;
 
 import com.example.android.cdocs.R;
 import com.example.android.cdocs.ui.adapter.DocsAdapter;
@@ -14,7 +15,8 @@ import com.example.android.cdocs.utils.IConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashBoardActivity extends AppCompatActivity {
+public class DashBoardActivity extends AppCompatActivity
+        implements DocsAdapter.OnItemClickListener {
     ActivityDashBoardBinding activityDashBoardBinding;
 
     @Override
@@ -42,6 +44,14 @@ public class DashBoardActivity extends AppCompatActivity {
                 , LinearLayoutManager.VERTICAL
                 , false);
         activityDashBoardBinding.rvDocs.setLayoutManager(layoutManager);
-        activityDashBoardBinding.rvDocs.setAdapter(new DocsAdapter(list));
+        activityDashBoardBinding.rvDocs.setAdapter(new DocsAdapter(this, list));
+    }
+
+    @Override
+    public void onClick(Docs item, int position) {
+        Toast.makeText(DashBoardActivity.this,
+                "Position : " + position + "Docs : " + item.getTitle(),
+                Toast.LENGTH_SHORT)
+                .show();
     }
 }
