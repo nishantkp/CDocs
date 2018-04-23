@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#1B95E0</color>
     <color name="colorAccent">#FF4081</color>
     <color name="listItemDividerColor">#ABABAB</color>
+
+    <!-- Background color when user presses list item -->
+    <color name="listItemSelector">#F0F0F0</color>
 </resources>
