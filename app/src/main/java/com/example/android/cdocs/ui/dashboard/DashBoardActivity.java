@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.android.cdocs.R;
-import com.example.android.cdocs.adapter.DocsAdapter;
+import com.example.android.cdocs.ui.adapter.DocsAdapter;
 import com.example.android.cdocs.databinding.ActivityDashBoardBinding;
 import com.example.android.cdocs.ui.model.Docs;
 import com.example.android.cdocs.utils.IConstants;
