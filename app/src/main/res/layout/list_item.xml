@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.android.cdocs.ui.model.Docs" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="This is a temp file, whe user clicks on item it opnes a pdf viewer.pdf"
+            android:text="@{item.title}"
             android:textSize="16sp" />
 
         <TextView
@@ -22,7 +29,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:padding="16dp"
-            android:text="pdf"
+            android:text="@{item.type}"
             android:textAllCaps="true"
             android:textSize="16sp" />
 
