@@ -16,12 +16,14 @@ import com.example.android.cdocs.ui.adapter.DocsAdapter;
 import com.example.android.cdocs.ui.model.Docs;
 import com.example.android.cdocs.utils.IConstants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DashBoardActivity extends AppCompatActivity
-        implements DocsAdapter.OnItemClickListener {
+        implements DocsAdapter.OnItemClickListener, DashBoardContract.View {
+
     ActivityDashBoardBinding activityDashBoardBinding;
+    DashBoardPresenter mPresenter;
+    DocsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +37,10 @@ public class DashBoardActivity extends AppCompatActivity
                     .setText(getIntent().getStringExtra(IConstants.Login.KEY_USER_NAME));
         }
 
-        /* Temp list to check RecyclerView with DataBinding */
-        List<Docs> list = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            list.add(new Docs("This is to test RecyclerView with DataBinding!", "pdf"));
-        }
-
-        // LayoutManager that defines how RecyclerView behaves
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(
-                this
-                , LinearLayoutManager.VERTICAL
-                , false);
-        activityDashBoardBinding.rvDocs.setLayoutManager(layoutManager);
-        activityDashBoardBinding.rvDocs.setAdapter(new DocsAdapter(this, list));
-        runLayoutAnimation(activityDashBoardBinding.rvDocs);
+        mPresenter = new DashBoardPresenter();
+        mPresenter.attachView(this);
+        setRecyclerView();
+        mPresenter.loadData();
     }
 
     @Override
@@ -58,6 +49,27 @@ public class DashBoardActivity extends AppCompatActivity
                 "Position : " + position + "Docs : " + item.getTitle(),
                 Toast.LENGTH_SHORT)
                 .show();
+    }
+
+    @Override
+    public void showData(List<Docs> docsList) {
+        mAdapter.swapData(docsList);
+    }
+
+    /**
+     * Set up the Recycler view
+     */
+    private void setRecyclerView() {
+        // LayoutManager that defines how RecyclerView behaves
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(
+                this
+                , LinearLayoutManager.VERTICAL
+                , false);
+        activityDashBoardBinding.rvDocs.setLayoutManager(layoutManager);
+        mAdapter = new DocsAdapter(this, null);
+        activityDashBoardBinding.rvDocs.setAdapter(mAdapter);
+        runLayoutAnimation(activityDashBoardBinding.rvDocs);
     }
 
     // Adds fall down layout animation to RecyclerView items
