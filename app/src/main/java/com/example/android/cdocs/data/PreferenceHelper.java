@@ -20,7 +20,7 @@ public class PreferenceHelper {
 
     // Write data into SharedPreferences
     public void writeString(String key, String value) {
-        sEditor.putString(key, value);
+        sEditor.putString(key, value).commit();
     }
 
     // Get the data from SharedPreferences with specific key, if there is no data to be found

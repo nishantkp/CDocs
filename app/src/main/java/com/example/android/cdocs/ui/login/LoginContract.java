@@ -6,4 +6,12 @@ public interface LoginContract {
     interface view extends MvpView {
         void getUserDetails(String userName, String token);
     }
+
+    interface Presenter {
+        void getUserTwitterData();
+
+        void saveDataToPreference(String key, String value);
+
+        String readDataFromPreference(String key);
+    }
 }
