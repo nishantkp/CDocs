@@ -10,6 +10,8 @@ public interface LoginContract {
     interface Presenter {
         void getUserTwitterData();
 
+        boolean isUserTokenAvailable();
+
         void saveDataToPreference(String key, String value);
 
         String readDataFromPreference(String key);

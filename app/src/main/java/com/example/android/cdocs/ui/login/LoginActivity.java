@@ -27,6 +27,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.vi
                 DataBindingUtil.setContentView(this, R.layout.activity_login);
         mLoginPresenter = new LoginPresenter(DataManager.getInstance(this));
         mLoginPresenter.attachView(this);
+        if (mLoginPresenter.isUserTokenAvailable()) {
+            startActivity(new Intent(LoginActivity.this, DashBoardActivity.class));
+            finish();
+        }
 
         mLoginActivityBinging.btnTwitterLogin.setCallback(new Callback<TwitterSession>() {
             @Override
@@ -54,5 +58,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.vi
         mLoginPresenter.saveDataToPreference(IConstants.Preference.KEY_USER_NAME_PREF, userName);
         mLoginPresenter.saveDataToPreference(IConstants.Preference.KEY_TOKEN_PREF, token);
         startActivity(new Intent(LoginActivity.this, DashBoardActivity.class));
+        finish();
     }
 }
