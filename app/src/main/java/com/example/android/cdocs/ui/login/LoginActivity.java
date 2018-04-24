@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.android.cdocs.R;
+import com.example.android.cdocs.data.DataManager;
 import com.example.android.cdocs.databinding.ActivityLoginBinding;
 import com.example.android.cdocs.ui.dashboard.DashBoardActivity;
 import com.example.android.cdocs.utils.IConstants;
@@ -24,13 +25,13 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.vi
         super.onCreate(savedInstanceState);
         mLoginActivityBinging =
                 DataBindingUtil.setContentView(this, R.layout.activity_login);
-        mLoginPresenter = new LoginPresenter();
+        mLoginPresenter = new LoginPresenter(DataManager.getInstance(this));
         mLoginPresenter.attachView(this);
 
         mLoginActivityBinging.btnTwitterLogin.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                mLoginPresenter.getUserData();
+                mLoginPresenter.getUserTwitterData();
             }
 
             @Override
@@ -49,9 +50,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.vi
 
     @Override
     public void getUserDetails(String userName, String token) {
-        Intent dashBoardIntent = new Intent(LoginActivity.this, DashBoardActivity.class);
-        dashBoardIntent.putExtra(IConstants.Login.KEY_USER_NAME, userName);
-        dashBoardIntent.putExtra(IConstants.Login.KEY_TOKEN, token);
-        startActivity(dashBoardIntent);
+        // Save user name and token into SharedPreference
+        mLoginPresenter.saveDataToPreference(IConstants.Preference.KEY_USER_NAME_PREF, userName);
+        mLoginPresenter.saveDataToPreference(IConstants.Preference.KEY_TOKEN_PREF, token);
+        startActivity(new Intent(LoginActivity.this, DashBoardActivity.class));
     }
 }
