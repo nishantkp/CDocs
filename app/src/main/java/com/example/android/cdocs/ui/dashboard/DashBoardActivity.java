@@ -40,7 +40,7 @@ public class DashBoardActivity extends AppCompatActivity
         mPresenter = new DashBoardPresenter();
         mPresenter.attachView(this);
         setRecyclerView();
-        mPresenter.loadData();
+        mPresenter.loadFakeData();
     }
 
     @Override

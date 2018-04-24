@@ -6,10 +6,10 @@ import com.example.android.cdocs.ui.model.Docs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashBoardPresenter extends BasePresenter<DashBoardContract.View> {
+public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
+        implements DashBoardContract.Presenter {
 
     DashBoardPresenter() {
-
     }
 
     @Override
@@ -22,7 +22,8 @@ public class DashBoardPresenter extends BasePresenter<DashBoardContract.View> {
         super.detachView();
     }
 
-    public void loadData() {
+    @Override
+    public void loadFakeData() {
         List<Docs> list = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             list.add(new Docs("This is to test RecyclerView with DataBinding!", "pdf"));

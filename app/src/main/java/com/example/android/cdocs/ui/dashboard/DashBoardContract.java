@@ -9,4 +9,8 @@ public interface DashBoardContract {
     interface View extends MvpView {
         void showData(List<Docs> docsList);
     }
+
+    interface Presenter {
+        void loadFakeData();
+    }
 }
