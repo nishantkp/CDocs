@@ -15,7 +15,7 @@ import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 
-public class LoginActivity extends BaseActivity implements LoginContract.view {
+public class LoginActivity extends BaseActivity implements LoginContract.View {
     private ActivityLoginBinding mLoginActivityBinging;
     private LoginPresenter mLoginPresenter;
 

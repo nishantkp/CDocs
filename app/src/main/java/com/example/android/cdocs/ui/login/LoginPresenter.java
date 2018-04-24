@@ -7,7 +7,7 @@ import com.twitter.sdk.android.core.TwitterAuthToken;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
 
-public class LoginPresenter extends BasePresenter<LoginContract.view>
+public class LoginPresenter extends BasePresenter<LoginContract.View>
         implements LoginContract.Presenter {
     private DataManager dataManager;
 
@@ -16,7 +16,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.view>
     }
 
     @Override
-    public void attachView(LoginContract.view view) {
+    public void attachView(LoginContract.View view) {
         super.attachView(view);
     }
 
