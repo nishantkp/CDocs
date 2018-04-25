@@ -3,7 +3,6 @@ package com.example.android.cdocs.ui.dashboard;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.animation.AnimationUtils;
@@ -11,6 +10,7 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import com.example.android.cdocs.R;
+import com.example.android.cdocs.base.BaseActivity;
 import com.example.android.cdocs.databinding.ActivityDashBoardBinding;
 import com.example.android.cdocs.ui.adapter.DocsAdapter;
 import com.example.android.cdocs.ui.model.Docs;
@@ -18,7 +18,7 @@ import com.example.android.cdocs.utils.IConstants;
 
 import java.util.List;
 
-public class DashBoardActivity extends AppCompatActivity
+public class DashBoardActivity extends BaseActivity
         implements DocsAdapter.OnItemClickListener, DashBoardContract.View {
 
     ActivityDashBoardBinding activityDashBoardBinding;
@@ -37,7 +37,7 @@ public class DashBoardActivity extends AppCompatActivity
                     .setText(getIntent().getStringExtra(IConstants.Login.KEY_USER_NAME));
         }
 
-        mPresenter = new DashBoardPresenter();
+        mPresenter = new DashBoardPresenter(mDataManager);
         mPresenter.attachView(this);
         setRecyclerView();
         mPresenter.loadFakeData();
