@@ -27,7 +27,7 @@ public class DatabaseHelper {
      *
      * @param docsList list of documents
      */
-    public void insertDocumentss(List<Docs> docsList) {
+    public void insertDocuments(List<Docs> docsList) {
         for (Docs docs : docsList) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(IDatabase.IContentTable.DOCUMENT_TITLE, docs.getTitle());

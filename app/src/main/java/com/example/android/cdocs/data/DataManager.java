@@ -33,7 +33,7 @@ public class DataManager {
 
     // Insert data into database table
     public void insertDataToDatabase(List<Docs> docsList) {
-        sDatabaseHelper.insertDocumentss(docsList);
+        sDatabaseHelper.insertDocuments(docsList);
     }
 
     // Read data from database
