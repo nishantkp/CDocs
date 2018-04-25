@@ -24,6 +24,23 @@
         <activity
             android:name=".ui.dashboard.DashBoardActivity"
             android:label="@string/dashboard_label" />
+
+        <!--This is required if you want to do any message handling beyond receiving notifications
+        on apps in the background. To receive notifications in foregrounded apps,
+        to receive data payload, to send upstream messages, and so on-->
+        <service android:name=".service.FcmService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!--to handle the creation, rotation, and updating of registration tokens.
+        This is required for sending to specific devices or for creating device groups.-->
+        <service android:name=".service.FcmInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
