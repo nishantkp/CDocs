@@ -2,14 +2,21 @@ package com.example.android.cdocs.data;
 
 import android.content.Context;
 
+import com.example.android.cdocs.data.data.DatabaseHelper;
+import com.example.android.cdocs.ui.model.Docs;
+
+import java.util.List;
+
 public class DataManager {
     private static DataManager sDataManager;
     private static PreferenceHelper sPreferenceHelper;
+    private static DatabaseHelper sDatabaseHelper;
 
     public static DataManager getInstance(Context context) {
         if (sDataManager == null) {
             sDataManager = new DataManager();
             sPreferenceHelper = PreferenceHelper.getInstance(context);
+            sDatabaseHelper = DatabaseHelper.getInstance(context);
         }
         return sDataManager;
     }
@@ -22,5 +29,20 @@ public class DataManager {
     // Read data from SharedPreference
     public String readDataFromPreference(String key) {
         return sPreferenceHelper.readString(key);
+    }
+
+    // Insert data into database table
+    public void insertDataToDatabase(List<Docs> docsList) {
+        sDatabaseHelper.insertDocumentss(docsList);
+    }
+
+    // Read data from database
+    public List<Docs> readDataFromDatabase() {
+        return sDatabaseHelper.readDocumentList();
+    }
+
+    // Delete all the data from database table
+    public void deleteDataFromDatabase() {
+        sDatabaseHelper.deleteAll();
     }
 }
