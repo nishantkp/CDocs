@@ -2,7 +2,7 @@ package com.example.android.cdocs.data;
 
 import android.content.Context;
 
-import com.example.android.cdocs.data.data.DatabaseHelper;
+import com.example.android.cdocs.data.local.DatabaseHelper;
 import com.example.android.cdocs.ui.model.Docs;
 
 import java.util.List;

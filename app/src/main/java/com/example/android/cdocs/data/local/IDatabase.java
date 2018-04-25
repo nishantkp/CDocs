@@ -1,4 +1,4 @@
-package com.example.android.cdocs.data.data;
+package com.example.android.cdocs.data.local;
 
 public interface IDatabase {
 
