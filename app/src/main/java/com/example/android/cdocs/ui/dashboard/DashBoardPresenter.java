@@ -1,6 +1,7 @@
 package com.example.android.cdocs.ui.dashboard;
 
 import com.example.android.cdocs.base.BasePresenter;
+import com.example.android.cdocs.data.DataManager;
 import com.example.android.cdocs.ui.model.Docs;
 
 import java.util.ArrayList;
@@ -9,7 +10,10 @@ import java.util.List;
 public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
         implements DashBoardContract.Presenter {
 
-    DashBoardPresenter() {
+    private DataManager dataManager;
+
+    DashBoardPresenter(DataManager dataManager) {
+        this.dataManager = dataManager;
     }
 
     @Override
