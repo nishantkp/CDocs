@@ -18,6 +18,7 @@ import com.example.android.cdocs.base.BaseActivity;
 import com.example.android.cdocs.databinding.ActivityDashBoardBinding;
 import com.example.android.cdocs.ui.adapter.DocsAdapter;
 import com.example.android.cdocs.ui.model.Docs;
+import com.example.android.cdocs.utils.IConstants;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class DashBoardActivity extends BaseActivity
         mPresenter.attachView(this);
         setRecyclerView();
         mIntentFilter = new IntentFilter();
-        mIntentFilter.addAction("NOTIFICATION_INTENT");
+        mIntentFilter.addAction(IConstants.Fcm.ACTION_FCM_NOTIFICATION);
         mNotificationBroadcast = new NotificationBroadcast();
         mPresenter.loadData();
     }
@@ -102,8 +103,9 @@ public class DashBoardActivity extends BaseActivity
         @Override
         public void onReceive(Context context, Intent intent) {
             String intentId = intent.getAction();
+            final String fcmNotification = IConstants.Fcm.ACTION_FCM_NOTIFICATION;
             switch (intentId) {
-                case "NOTIFICATION_INTENT":
+                case fcmNotification:
                     mPresenter.loadData();
                     break;
                 default:

@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.example.android.cdocs.data.DataManager;
 import com.example.android.cdocs.ui.model.Docs;
+import com.example.android.cdocs.utils.IConstants;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -19,13 +20,13 @@ public class FcmService extends FirebaseMessagingService {
             // Insert single item into database
             dataManager.insertSingleItemToDatabase(
                     new Docs(
-                            remoteMessage.getData().get("TITLE"),
-                            remoteMessage.getData().get("TYPE")));
+                            remoteMessage.getData().get(IConstants.Fcm.KEY_FCM_MSG_TITLE),
+                            remoteMessage.getData().get(IConstants.Fcm.KEY_FCM_MSG_TYPE)));
 
             // Send broadcast intent to notify activity that, new notification is received and
             // update the recycler view accordingly
             Intent notificationIntent = new Intent();
-            notificationIntent.setAction("NOTIFICATION_INTENT");
+            notificationIntent.setAction(IConstants.Fcm.ACTION_FCM_NOTIFICATION);
             sendBroadcast(notificationIntent);
         }
     }

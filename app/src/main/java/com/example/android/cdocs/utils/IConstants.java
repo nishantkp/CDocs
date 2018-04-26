@@ -17,5 +17,6 @@ public interface IConstants {
     interface Fcm {
         String KEY_FCM_MSG_TITLE = "TITLE";
         String KEY_FCM_MSG_TYPE = "TYPE";
+        String ACTION_FCM_NOTIFICATION = "ACTION_FCM_NOTIFICATION";
     }
 }
