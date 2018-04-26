@@ -14,7 +14,6 @@ import com.example.android.cdocs.base.BaseActivity;
 import com.example.android.cdocs.databinding.ActivityDashBoardBinding;
 import com.example.android.cdocs.ui.adapter.DocsAdapter;
 import com.example.android.cdocs.ui.model.Docs;
-import com.example.android.cdocs.utils.IConstants;
 
 import java.util.List;
 
@@ -30,12 +29,6 @@ public class DashBoardActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         activityDashBoardBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_dash_board);
-
-        if (getIntent() != null) {
-            activityDashBoardBinding
-                    .tvUserId
-                    .setText(getIntent().getStringExtra(IConstants.Login.KEY_USER_NAME));
-        }
 
         mPresenter = new DashBoardPresenter(mDataManager);
         mPresenter.attachView(this);
