@@ -25,11 +25,11 @@ import java.util.List;
 public class DashBoardActivity extends BaseActivity
         implements DocsAdapter.OnItemClickListener, DashBoardContract.View {
 
-    ActivityDashBoardBinding activityDashBoardBinding;
-    DashBoardPresenter mPresenter;
-    DocsAdapter mAdapter;
-    IntentFilter mIntentFilter;
-    NotificationBroadcast mNotificationBroadcast;
+    private ActivityDashBoardBinding activityDashBoardBinding;
+    private DashBoardPresenter mPresenter;
+    private DocsAdapter mAdapter;
+    private IntentFilter mIntentFilter;
+    private NotificationBroadcast mNotificationBroadcast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
