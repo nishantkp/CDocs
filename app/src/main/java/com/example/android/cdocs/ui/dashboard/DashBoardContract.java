@@ -12,5 +12,7 @@ public interface DashBoardContract {
 
     interface Presenter {
         void loadData();
+
+        void logout();
     }
 }

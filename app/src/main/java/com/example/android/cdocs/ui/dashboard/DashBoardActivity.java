@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import com.example.android.cdocs.R;
 import com.example.android.cdocs.base.BaseActivity;
 import com.example.android.cdocs.databinding.ActivityDashBoardBinding;
 import com.example.android.cdocs.ui.adapter.DocsAdapter;
+import com.example.android.cdocs.ui.login.LoginActivity;
 import com.example.android.cdocs.ui.model.Docs;
 import com.example.android.cdocs.utils.IConstants;
 
@@ -73,6 +76,26 @@ public class DashBoardActivity extends BaseActivity
     @Override
     public void showData(List<Docs> docsList) {
         mAdapter.swapData(docsList);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_logout:
+                mPresenter.logout();
+                startActivity(
+                        new Intent(DashBoardActivity.this, LoginActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
