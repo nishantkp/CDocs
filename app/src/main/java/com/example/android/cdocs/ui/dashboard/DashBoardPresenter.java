@@ -29,6 +29,6 @@ public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
 
     @Override
     public void logout() {
-        // TODO: Implement logout functionality, particularly clearing database and preferences
+        dataManager.logout();
     }
 }
