@@ -30,7 +30,7 @@ public class PreferenceHelper {
     }
 
     // Clear all the saved preferences when user clicks logout button
-    public void logout() {
+    public void clearPreferences() {
         sEditor.clear().commit();
     }
 }

@@ -23,4 +23,9 @@ public class DataManager {
     public String readDataFromPreference(String key) {
         return sPreferenceHelper.readString(key);
     }
+
+    // Clear preferences when user clicks on logout
+    public void logout() {
+        sPreferenceHelper.clearPreferences();
+    }
 }
