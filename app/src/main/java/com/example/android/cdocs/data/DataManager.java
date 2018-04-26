@@ -50,4 +50,9 @@ public class DataManager {
     public void deleteDataFromDatabase() {
         sDatabaseHelper.deleteAll();
     }
+
+    // Clear preferences when user clicks on logout
+    public void logout() {
+        sPreferenceHelper.clearPreferences();
+    }
 }
