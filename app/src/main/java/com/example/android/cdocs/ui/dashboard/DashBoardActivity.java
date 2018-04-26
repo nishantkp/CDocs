@@ -37,6 +37,10 @@ public class DashBoardActivity extends BaseActivity
         activityDashBoardBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_dash_board);
 
+        setSupportActionBar(activityDashBoardBinding.tbDashboard);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setTitle(R.string.dashboard_label);
+
         mPresenter = new DashBoardPresenter(mDataManager);
         mPresenter.attachView(this);
         setRecyclerView();
