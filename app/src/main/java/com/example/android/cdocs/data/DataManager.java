@@ -36,6 +36,11 @@ public class DataManager {
         sDatabaseHelper.insertDocuments(docsList);
     }
 
+    // Insert single item into database
+    public void insertSingleItemToDatabase(Docs docs) {
+        sDatabaseHelper.inserSIngleItem(docs);
+    }
+
     // Read data from database
     public List<Docs> readDataFromDatabase() {
         return sDatabaseHelper.readDocumentList();

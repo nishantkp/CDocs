@@ -37,6 +37,18 @@ public class DatabaseHelper {
     }
 
     /**
+     * This method is called to insert single item to database
+     *
+     * @param docs Docs object
+     */
+    public void inserSIngleItem(Docs docs) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(IDatabase.IContentTable.DOCUMENT_TITLE, docs.getTitle());
+        contentValues.put(IDatabase.IContentTable.TYPE, docs.getType());
+        sDatabase.insert(IDatabase.IContentTable.TABLE_NAME, null, contentValues);
+    }
+
+    /**
      * This method is called to get every single data from database table
      *
      * @return data inform of List<Docs> format
