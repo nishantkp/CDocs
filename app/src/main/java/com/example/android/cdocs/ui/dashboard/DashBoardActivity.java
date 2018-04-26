@@ -33,7 +33,7 @@ public class DashBoardActivity extends BaseActivity
         mPresenter = new DashBoardPresenter(mDataManager);
         mPresenter.attachView(this);
         setRecyclerView();
-        mPresenter.loadFakeData();
+        mPresenter.loadData();
     }
 
     @Override

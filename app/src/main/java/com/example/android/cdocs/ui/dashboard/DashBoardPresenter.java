@@ -2,10 +2,6 @@ package com.example.android.cdocs.ui.dashboard;
 
 import com.example.android.cdocs.base.BasePresenter;
 import com.example.android.cdocs.data.DataManager;
-import com.example.android.cdocs.ui.model.Docs;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
         implements DashBoardContract.Presenter {
@@ -27,11 +23,7 @@ public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
     }
 
     @Override
-    public void loadFakeData() {
-        List<Docs> list = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            list.add(new Docs("This is to test RecyclerView with DataBinding!", "pdf"));
-        }
-        getView().showData(list);
+    public void loadData() {
+        getView().showData(dataManager.readDataFromDatabase());
     }
 }
