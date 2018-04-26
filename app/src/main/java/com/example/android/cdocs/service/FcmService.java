@@ -1,5 +1,7 @@
 package com.example.android.cdocs.service;
 
+import android.content.Intent;
+
 import com.example.android.cdocs.data.DataManager;
 import com.example.android.cdocs.ui.model.Docs;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -19,6 +21,12 @@ public class FcmService extends FirebaseMessagingService {
                     new Docs(
                             remoteMessage.getData().get("TITLE"),
                             remoteMessage.getData().get("TYPE")));
+
+            // Send broadcast intent to notify activity that, new notification is received and
+            // update the recycler view accordingly
+            Intent notificationIntent = new Intent();
+            notificationIntent.setAction("NOTIFICATION_INTENT");
+            sendBroadcast(notificationIntent);
         }
     }
 }

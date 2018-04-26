@@ -1,10 +1,14 @@
 package com.example.android.cdocs.ui.dashboard;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
@@ -23,6 +27,8 @@ public class DashBoardActivity extends BaseActivity
     ActivityDashBoardBinding activityDashBoardBinding;
     DashBoardPresenter mPresenter;
     DocsAdapter mAdapter;
+    IntentFilter mIntentFilter;
+    NotificationBroadcast mNotificationBroadcast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,22 @@ public class DashBoardActivity extends BaseActivity
         mPresenter = new DashBoardPresenter(mDataManager);
         mPresenter.attachView(this);
         setRecyclerView();
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction("NOTIFICATION_INTENT");
+        mNotificationBroadcast = new NotificationBroadcast();
         mPresenter.loadData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(mNotificationBroadcast, mIntentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mNotificationBroadcast);
     }
 
     @Override
@@ -74,5 +95,22 @@ public class DashBoardActivity extends BaseActivity
         recyclerView.setLayoutAnimation(controller);
         recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.scheduleLayoutAnimation();
+    }
+
+    private class NotificationBroadcast extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String intentId = intent.getAction();
+            switch (intentId) {
+                case "NOTIFICATION_INTENT":
+                    mPresenter.loadData();
+                    break;
+                default:
+                    Log.i(DashBoardActivity.class.getSimpleName(),
+                            "NotificationBroadcast() : No intent ID found!");
+                    break;
+            }
+        }
     }
 }
