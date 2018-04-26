@@ -24,7 +24,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         super.onCreate(savedInstanceState);
         mLoginActivityBinging =
                 DataBindingUtil.setContentView(this, R.layout.activity_login);
-        mLoginPresenter = new LoginPresenter(mDataManager);
+        // When app is in background or app is swiped off and it receives notification,
+        // and user clicks on system tray notification, we get the data payload in launcher
+        // activity's onCreate() method.
+        // To get the data call getIntent().getExtras() and extract the data from bundle with
+        // the key provided from firebase console when sending the message
+        Bundle bundle = getIntent().getExtras();
+        mLoginPresenter = new LoginPresenter(mDataManager, bundle);
         mLoginPresenter.attachView(this);
         if (mLoginPresenter.isUserTokenAvailable()) {
             startActivity(new Intent(LoginActivity.this, DashBoardActivity.class));

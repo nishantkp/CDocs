@@ -1,7 +1,10 @@
 package com.example.android.cdocs.ui.login;
 
+import android.os.Bundle;
+
 import com.example.android.cdocs.base.BasePresenter;
 import com.example.android.cdocs.data.DataManager;
+import com.example.android.cdocs.ui.model.Docs;
 import com.example.android.cdocs.utils.IConstants;
 import com.twitter.sdk.android.core.TwitterAuthToken;
 import com.twitter.sdk.android.core.TwitterCore;
@@ -11,8 +14,13 @@ public class LoginPresenter extends BasePresenter<LoginContract.View>
         implements LoginContract.Presenter {
     private DataManager dataManager;
 
-    LoginPresenter(DataManager dataManager) {
+    LoginPresenter(DataManager dataManager, Bundle bundle) {
         this.dataManager = dataManager;
+        if (bundle != null) {
+            this.dataManager.insertSingleItemToDatabase(
+                    new Docs(bundle.getString(IConstants.Fcm.KEY_FCM_MSG_TITLE),
+                            bundle.getString(IConstants.Fcm.KEY_FCM_MSG_TYPE)));
+        }
     }
 
     @Override

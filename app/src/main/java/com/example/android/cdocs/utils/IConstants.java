@@ -12,4 +12,10 @@ public interface IConstants {
         String KEY_USER_NAME_PREF = "KEY_USER_NAME_PREF";
         String KEY_TOKEN_PREF = "KEY_TOKEN_PREF";
     }
+
+    // Keys for Firebase message data
+    interface Fcm {
+        String KEY_FCM_MSG_TITLE = "TITLE";
+        String KEY_FCM_MSG_TYPE = "TYPE";
+    }
 }
