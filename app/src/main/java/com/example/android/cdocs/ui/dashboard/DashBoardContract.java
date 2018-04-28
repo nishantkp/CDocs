@@ -15,6 +15,6 @@ public interface DashBoardContract {
 
         void logout();
 
-        void downloadFile(String url);
+        void downloadFile(Docs docs);
     }
 }

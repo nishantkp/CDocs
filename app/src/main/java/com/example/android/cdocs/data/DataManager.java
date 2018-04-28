@@ -100,12 +100,13 @@ public class DataManager {
      * .io() thread by Rx
      *
      * @param responseBody ResponseBody object of okHttp
+     * @param fileName     Name of the file
      */
-    public void writeDataToDisk(final ResponseBody responseBody) {
+    public void writeDataToDisk(final ResponseBody responseBody, final String fileName) {
         Observable.fromCallable(new Callable<Object>() {
             @Override
             public Object call() throws Exception {
-                return sUtils.writeResponseBodyToDisk(responseBody);
+                return sUtils.writeResponseBodyToDisk(responseBody, fileName);
             }
         }).subscribeOn(Schedulers.io()).subscribe();
     }

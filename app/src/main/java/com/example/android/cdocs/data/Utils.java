@@ -40,10 +40,11 @@ public class Utils {
      * If you want to store data into external storage call getPublicFileStorageDir() method to get
      * the file directory
      *
-     * @param body ResponseBody object received from making network call
+     * @param body     ResponseBody object received from making network call
+     * @param fileName Name of the file
      * @return true if the file is saved into external file and false if it's not
      */
-    public boolean writeResponseBodyToDisk(ResponseBody body) {
+    public boolean writeResponseBodyToDisk(ResponseBody body, String fileName) {
         try {
             InputStream inputStream = null;
             OutputStream outputStream = null;
@@ -55,7 +56,7 @@ public class Utils {
                 long fileSizeDownloaded = 0;
 
                 File file = new File(weakReference.get().getApplicationContext().getFilesDir(),
-                        "TEMP");
+                        fileName);
                 inputStream = body.byteStream();
                 outputStream = new FileOutputStream(file);
 
@@ -93,16 +94,17 @@ public class Utils {
     /**
      * Method to get the file if user has external storage attached to device i.e USB or SD card
      *
+     * @param fileName name of the file
      * @return File object indication location where you want to store object
      */
-    private File getPublicFileStorageDir() {
+    private File getPublicFileStorageDir(String fileName) {
         // Get the directory for the user's public documents directory.
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
             File file = new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_DOCUMENTS), "CDOCS");
+                    Environment.DIRECTORY_DOCUMENTS), fileName);
             return file;
         }
         return new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOWNLOADS), "CDOCS");
+                Environment.DIRECTORY_DOWNLOADS), fileName);
     }
 }

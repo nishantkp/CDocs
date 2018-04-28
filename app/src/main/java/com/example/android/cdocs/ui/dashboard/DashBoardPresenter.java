@@ -2,6 +2,7 @@ package com.example.android.cdocs.ui.dashboard;
 
 import com.example.android.cdocs.base.BasePresenter;
 import com.example.android.cdocs.data.DataManager;
+import com.example.android.cdocs.ui.model.Docs;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -39,9 +40,9 @@ public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
     }
 
     @Override
-    public void downloadFile(String url) {
+    public void downloadFile(final Docs docs) {
         // Download file from url
-        dataManager.downloadFileFromUrlRx(url)
+        dataManager.downloadFileFromUrlRx(docs.getUrl())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
@@ -52,7 +53,7 @@ public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                        dataManager.writeDataToDisk(responseBody);
+                        dataManager.writeDataToDisk(responseBody, docs.getTitle());
                     }
 
                     @Override

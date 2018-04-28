@@ -71,6 +71,7 @@ public class DashBoardActivity extends BaseActivity
                 "Position : " + position + "Docs : " + item.getTitle(),
                 Toast.LENGTH_SHORT)
                 .show();
+        mPresenter.downloadFile(item);
         // TODO : use Presenter's downloadFile(String url) method to download file when user clicks on list item
     }
 
