@@ -18,7 +18,8 @@ public class FcmService extends FirebaseMessagingService {
             dataManager.insertSingleItemToDatabase(
                     new Docs(
                             remoteMessage.getData().get("TITLE"),
-                            remoteMessage.getData().get("TYPE")));
+                            remoteMessage.getData().get("TYPE"),
+                            remoteMessage.getData().get("URL")));
         }
     }
 }
