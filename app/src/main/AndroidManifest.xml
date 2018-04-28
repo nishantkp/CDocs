@@ -61,7 +61,13 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".ui.pdf.PdfActivity"></activity>
+        <activity
+            android:name=".ui.pdf.PdfActivity"
+            android:parentActivityName=".ui.dashboard.DashBoardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.dashboard.DashBoardActivity" />
+        </activity>
     </application>
 
 </manifest>
