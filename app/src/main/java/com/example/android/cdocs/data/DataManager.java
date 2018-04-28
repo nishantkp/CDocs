@@ -70,6 +70,12 @@ public class DataManager {
         sPreferenceHelper.clearPreferences();
     }
 
+    /**
+     * Use Retrofit to download file from provided url
+     *
+     * @param url url of a file from where we want to download it
+     * @return ResponseBody object
+     */
     public Call<ResponseBody> downloadFileFromUrl(String url) {
         return sApiInterface.downloadFile(url);
     }

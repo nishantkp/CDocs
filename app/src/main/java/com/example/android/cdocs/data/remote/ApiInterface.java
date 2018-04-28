@@ -20,6 +20,12 @@ public interface ApiInterface {
     @GET()
     Call<ResponseBody> downloadFile(@Url String url);
 
+    /**
+     * Callback method for getting file from provided url
+     *
+     * @param url Url of file in which we are interested in
+     * @return Observable object of ResponseBody
+     */
     @Streaming
     @GET()
     Observable<ResponseBody> downloadFileRx(@Url String url);
