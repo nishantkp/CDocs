@@ -20,4 +20,9 @@ public interface IConstants {
         String KEY_FCM_MSG_URL = "URL";
         String ACTION_FCM_NOTIFICATION = "ACTION_FCM_NOTIFICATION";
     }
+
+    // Keys for Pdf activity
+    interface Pdf {
+        String KEY_PDF_DOCS = "KEY_PDF_DOCS";
+    }
 }

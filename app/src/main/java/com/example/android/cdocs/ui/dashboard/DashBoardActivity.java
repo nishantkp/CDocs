@@ -21,6 +21,7 @@ import com.example.android.cdocs.databinding.ActivityDashBoardBinding;
 import com.example.android.cdocs.ui.adapter.DocsAdapter;
 import com.example.android.cdocs.ui.login.LoginActivity;
 import com.example.android.cdocs.ui.model.Docs;
+import com.example.android.cdocs.ui.pdf.PdfActivity;
 import com.example.android.cdocs.utils.IConstants;
 
 import java.util.List;
@@ -72,6 +73,10 @@ public class DashBoardActivity extends BaseActivity
                 Toast.LENGTH_SHORT)
                 .show();
         mPresenter.downloadFile(item);
+        // Start PdfActivity to view pdf
+        Intent intent = new Intent(DashBoardActivity.this, PdfActivity.class);
+        intent.putExtra(IConstants.Pdf.KEY_PDF_DOCS, item);
+        startActivity(intent);
         // TODO : use Presenter's downloadFile(String url) method to download file when user clicks on list item
     }
 
