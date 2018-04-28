@@ -19,7 +19,8 @@ public class LoginPresenter extends BasePresenter<LoginContract.View>
         if (bundle != null) {
             this.dataManager.insertSingleItemToDatabase(
                     new Docs(bundle.getString(IConstants.Fcm.KEY_FCM_MSG_TITLE),
-                            bundle.getString(IConstants.Fcm.KEY_FCM_MSG_TYPE)));
+                            bundle.getString(IConstants.Fcm.KEY_FCM_MSG_TYPE),
+                            bundle.getString(IConstants.Fcm.KEY_FCM_MSG_URL)));
         }
     }
 

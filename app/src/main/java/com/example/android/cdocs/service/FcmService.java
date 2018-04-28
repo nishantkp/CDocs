@@ -21,7 +21,8 @@ public class FcmService extends FirebaseMessagingService {
             dataManager.insertSingleItemToDatabase(
                     new Docs(
                             remoteMessage.getData().get(IConstants.Fcm.KEY_FCM_MSG_TITLE),
-                            remoteMessage.getData().get(IConstants.Fcm.KEY_FCM_MSG_TYPE)));
+                            remoteMessage.getData().get(IConstants.Fcm.KEY_FCM_MSG_TYPE),
+                            remoteMessage.getData().get(IConstants.Fcm.KEY_FCM_MSG_URL)));
 
             // Send broadcast intent to notify activity that, new notification is received and
             // update the recycler view accordingly
