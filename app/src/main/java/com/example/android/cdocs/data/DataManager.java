@@ -8,10 +8,12 @@ import com.example.android.cdocs.data.remote.ApiInterface;
 import com.example.android.cdocs.ui.model.Docs;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
@@ -28,7 +30,7 @@ public class DataManager {
             sPreferenceHelper = PreferenceHelper.getInstance(context);
             sDatabaseHelper = DatabaseHelper.getInstance(context);
             sApiInterface = ApiClient.getClient().create(ApiInterface.class);
-            sUtils = Utils.getInstance();
+            sUtils = Utils.getInstance(context);
         }
         return sDataManager;
     }
@@ -72,6 +74,12 @@ public class DataManager {
         return sApiInterface.downloadFile(url);
     }
 
+    /**
+     * Use retrofit to download file
+     *
+     * @param url url of file from where you want to download it
+     * @return Observable object of ResponseBody
+     */
     public Observable<ResponseBody> downloadFileFromUrlRx(String url) {
         return sApiInterface.downloadFileRx(url).flatMap(new Function<ResponseBody, ObservableSource<ResponseBody>>() {
             @Override
@@ -79,5 +87,20 @@ public class DataManager {
                 return Observable.just(responseBody);
             }
         });
+    }
+
+    /**
+     * Use this method to write data into devices internal-storage on
+     * .io() thread by Rx
+     *
+     * @param responseBody ResponseBody object of okHttp
+     */
+    public void writeDataToDisk(final ResponseBody responseBody) {
+        Observable.fromCallable(new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                return sUtils.writeResponseBodyToDisk(responseBody);
+            }
+        }).subscribeOn(Schedulers.io()).subscribe();
     }
 }

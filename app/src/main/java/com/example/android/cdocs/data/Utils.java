@@ -1,28 +1,44 @@
 package com.example.android.cdocs.data;
 
+import android.content.Context;
 import android.os.Environment;
 
+import com.example.android.cdocs.base.BaseActivity;
+
+import java.io.Console;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.ref.WeakReference;
 
 import okhttp3.ResponseBody;
 
 public class Utils {
 
     private static Utils sUtils;
+    // Weak Reference to avoid memory leaks
+    private static WeakReference<Context> weakReference;
 
-    public static Utils getInstance() {
+    /**
+     * Singleton
+     *
+     * @param context App Context
+     * @return Utils object
+     */
+    public static Utils getInstance(Context context) {
         if (sUtils == null) {
             sUtils = new Utils();
+            weakReference = new WeakReference<>(context);
         }
         return sUtils;
     }
 
     /**
-     * Write date into External file storage
+     * Android boiler-plate code write date into internal/external file storage.
+     * If you want to store data into external storage call getPublicFileStorageDir() method to get
+     * the file directory
      *
      * @param body ResponseBody object received from making network call
      * @return true if the file is saved into external file and false if it's not
@@ -38,8 +54,10 @@ public class Utils {
                 long fileSize = body.contentLength();
                 long fileSizeDownloaded = 0;
 
+                File file = new File(weakReference.get().getApplicationContext().getFilesDir(),
+                        "TEMP");
                 inputStream = body.byteStream();
-                outputStream = new FileOutputStream(getPublicFileStorageDir());
+                outputStream = new FileOutputStream(file);
 
                 while (true) {
                     int read = inputStream.read(fileReader);
@@ -72,11 +90,17 @@ public class Utils {
         }
     }
 
+    /**
+     * Method to get the file if user has external storage attached to device i.e USB or SD card
+     *
+     * @return File object indication location where you want to store object
+     */
     private File getPublicFileStorageDir() {
         // Get the directory for the user's public documents directory.
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            return new File(Environment.getExternalStoragePublicDirectory(
+            File file = new File(Environment.getExternalStoragePublicDirectory(
                     Environment.DIRECTORY_DOCUMENTS), "CDOCS");
+            return file;
         }
         return new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOWNLOADS), "CDOCS");
