@@ -13,6 +13,7 @@ public class ApiClient {
 
         // Create a retrofit object
         return new Retrofit.Builder()
+                .baseUrl("http://google.com")
                 .client(httpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
