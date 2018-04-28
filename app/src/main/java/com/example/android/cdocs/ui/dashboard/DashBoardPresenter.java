@@ -30,7 +30,10 @@ public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
     public void loadFakeData() {
         List<Docs> list = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
-            list.add(new Docs("This is to test RecyclerView with DataBinding!", "pdf"));
+            list.add(new Docs(
+                    "This is to test RecyclerView with DataBinding!",
+                    "pdf",
+                    "https://www.fakefata.load.pdf"));
         }
         getView().showData(list);
     }

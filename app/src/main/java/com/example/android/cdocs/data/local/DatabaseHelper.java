@@ -32,6 +32,7 @@ public class DatabaseHelper {
             ContentValues contentValues = new ContentValues();
             contentValues.put(IDatabase.IContentTable.DOCUMENT_TITLE, docs.getTitle());
             contentValues.put(IDatabase.IContentTable.TYPE, docs.getType());
+            contentValues.put(IDatabase.IContentTable.URL, docs.getUrl());
             sDatabase.insert(IDatabase.IContentTable.TABLE_NAME, null, contentValues);
         }
     }
@@ -45,6 +46,7 @@ public class DatabaseHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(IDatabase.IContentTable.DOCUMENT_TITLE, docs.getTitle());
         contentValues.put(IDatabase.IContentTable.TYPE, docs.getType());
+        contentValues.put(IDatabase.IContentTable.TYPE, docs.getUrl());
         sDatabase.insert(IDatabase.IContentTable.TABLE_NAME, null, contentValues);
     }
 
@@ -58,7 +60,8 @@ public class DatabaseHelper {
         String[] projection =
                 {
                         IDatabase.IContentTable.DOCUMENT_TITLE,
-                        IDatabase.IContentTable.TYPE
+                        IDatabase.IContentTable.TYPE,
+                        IDatabase.IContentTable.URL
                 };
 
         Cursor cursor = sDatabase.query(
@@ -73,8 +76,9 @@ public class DatabaseHelper {
         while (cursor.moveToNext()) {
             String documentTitle = cursor.getString(cursor.getColumnIndex(IDatabase.IContentTable.DOCUMENT_TITLE));
             String type = cursor.getString(cursor.getColumnIndex(IDatabase.IContentTable.TYPE));
+            String url = cursor.getString(cursor.getColumnIndex(IDatabase.IContentTable.URL));
             // Add new Docs object to list
-            docsList.add(new Docs(documentTitle, type));
+            docsList.add(new Docs(documentTitle, type, url));
         }
         // Close the cursor after it's usage
         cursor.close();
