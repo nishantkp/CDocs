@@ -68,15 +68,10 @@ public class DashBoardActivity extends BaseActivity
 
     @Override
     public void onClick(Docs item, int position) {
-        Toast.makeText(DashBoardActivity.this,
-                "Position : " + position + "Docs : " + item.getTitle(),
-                Toast.LENGTH_SHORT)
-                .show();
         // Start PdfActivity to view pdf
         Intent intent = new Intent(DashBoardActivity.this, PdfActivity.class);
         intent.putExtra(IConstants.Pdf.KEY_PDF_DOCS, item);
         startActivity(intent);
-        // TODO : use Presenter's downloadFile(String url) method to download file when user clicks on list item
     }
 
     @Override
