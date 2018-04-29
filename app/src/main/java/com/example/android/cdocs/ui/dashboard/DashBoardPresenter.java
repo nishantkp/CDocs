@@ -38,33 +38,4 @@ public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
     public void logout() {
         dataManager.logout();
     }
-
-    @Override
-    public void downloadFile(final Docs docs) {
-        // Download file from url
-        dataManager.downloadFileFromUrlRx(docs.getUrl())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody responseBody) {
-                        dataManager.writeDataToDisk(responseBody, docs.getTitle());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 }
