@@ -221,8 +221,7 @@ public class Utils {
     public Bitmap getFirstPage(Docs docs) {
         PdfRenderer pdfRenderer = getPage(docs);
         if (pdfRenderer == null) return null;
-        pageCount = 0;
-        PdfRenderer.Page mCurrentPage = pdfRenderer.openPage(pageCount);
+        PdfRenderer.Page mCurrentPage = pdfRenderer.openPage(0);
         Bitmap bitmap = Bitmap.createBitmap(mCurrentPage.getWidth(),
                 mCurrentPage.getHeight(), Bitmap.Config.ARGB_8888);
         mCurrentPage.render(bitmap, null, null,

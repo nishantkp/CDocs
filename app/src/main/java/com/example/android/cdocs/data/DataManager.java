@@ -145,6 +145,19 @@ public class DataManager {
     }
 
     /**
+     * Call this method to get the first page of pdf in form of bitmap
+     * i.e you want to display first page right after download is complete
+     *
+     * @param docs Docs object in order to get the file name which helps to generate the correct
+     *             file path in internal directory
+     * @return Bitmap of page
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public Bitmap getFirstPage(Docs docs) {
+        return sUtils.getFirstPage(docs);
+    }
+
+    /**
      * Call this method to write data into internal memory
      *
      * @param responseBody OkHttp object containing data

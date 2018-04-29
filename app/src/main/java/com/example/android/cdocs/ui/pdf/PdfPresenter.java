@@ -103,11 +103,18 @@ public class PdfPresenter extends BasePresenter<PdfContract.View>
                                         getView().onError("Error saving file to memory");
                                     }
 
+                                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                     @Override
                                     public void onComplete() {
                                         // After writing is completed, set the download status true
                                         // to indicate download and writing operation is completed
                                         getView().downloadStatus(true);
+                                        Bitmap bitmap = dataManager.getFirstPage(docs);
+                                        if (bitmap == null) {
+                                            getView().onError("Error retrieving page");
+                                        } else {
+                                            getView().loadPage(bitmap);
+                                        }
                                     }
                                 });
                     }
