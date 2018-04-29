@@ -3,12 +3,16 @@ package com.example.android.cdocs.ui.pdf;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.support.annotation.RequiresApi;
 
 import com.example.android.cdocs.base.BasePresenter;
 import com.example.android.cdocs.data.DataManager;
 import com.example.android.cdocs.ui.model.Docs;
 
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -57,5 +61,65 @@ public class PdfPresenter extends BasePresenter<PdfContract.View>
         } else {
             getView().loadPage(bitmap);
         }
+    }
+
+    @Override
+    public void startDownload() {
+        // Set the download status to false indicating download is not complete
+        getView().downloadStatus(false);
+        // Download file from url
+        dataManager.downloadFileFromUrlRx(docs.getUrl())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(final ResponseBody responseBody) {
+                        // Store file in Internal storage using Rx
+                        Observable.fromCallable(new Callable<Object>() {
+                            @Override
+                            public Object call() throws Exception {
+                                return dataManager.writeDataToDisk(responseBody, docs);
+                            }
+                        }).subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Observer<Object>() {
+                                    @Override
+                                    public void onSubscribe(Disposable d) {
+
+                                    }
+
+                                    @Override
+                                    public void onNext(Object o) {
+
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        getView().onError("Error saving file to memory");
+                                    }
+
+                                    @Override
+                                    public void onComplete() {
+                                        // After writing is completed, set the download status true
+                                        // to indicate download and writing operation is completed
+                                        getView().downloadStatus(true);
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getView().onError("Error downloading file");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
     }
 }

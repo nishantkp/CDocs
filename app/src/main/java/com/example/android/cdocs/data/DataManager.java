@@ -1,6 +1,7 @@
 package com.example.android.cdocs.data;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -17,6 +18,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.internal.observers.BasicFuseableObserver;
 import io.reactivex.internal.operators.flowable.FlowableOnBackpressureDrop;
@@ -140,5 +142,16 @@ public class DataManager {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public Bitmap getPreviousPage(Docs docs) {
         return sUtils.getPreviousPage(docs);
+    }
+
+    /**
+     * Call this method to write data into internal memory
+     *
+     * @param responseBody OkHttp object containing data
+     * @param docs         Docs object -> needed in order to generate correct file path
+     * @return true or false depending upon writing operation is successful or not
+     */
+    public boolean writeDataToDisk(ResponseBody responseBody, Docs docs) {
+        return sUtils.writeResponseBodyToDisk(responseBody, docs.getTitle());
     }
 }

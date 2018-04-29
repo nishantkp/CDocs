@@ -10,6 +10,8 @@ public interface PdfContract {
         void loadPage(Bitmap bitmap);
 
         void onError(String error);
+
+        void downloadStatus(boolean status);
     }
 
     interface Presenter {
@@ -17,6 +19,6 @@ public interface PdfContract {
 
         void getPreviousPage();
 
-        //   void downloadFile(Docs docs);
+        void startDownload();
     }
 }

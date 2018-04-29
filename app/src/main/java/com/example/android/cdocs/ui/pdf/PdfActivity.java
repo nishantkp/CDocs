@@ -15,6 +15,8 @@ import com.example.android.cdocs.databinding.ActivityPdfBinding;
 import com.example.android.cdocs.ui.model.Docs;
 import com.example.android.cdocs.utils.IConstants;
 
+import static android.view.View.GONE;
+
 public class PdfActivity extends BaseActivity implements PdfContract.View {
 
     private ActivityPdfBinding activityPdfBinding;
@@ -28,6 +30,7 @@ public class PdfActivity extends BaseActivity implements PdfContract.View {
         docs = getIntent().getParcelableExtra(IConstants.Pdf.KEY_PDF_DOCS);
         presenter = new PdfPresenter(mDataManager, docs);
         presenter.attachView(this);
+        presenter.startDownload();
         activityPdfBinding.btnNext.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -52,5 +55,18 @@ public class PdfActivity extends BaseActivity implements PdfContract.View {
     @Override
     public void onError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void downloadStatus(boolean status) {
+        if (!status) {
+            activityPdfBinding.btnPrevious.setVisibility(View.GONE);
+            activityPdfBinding.btnNext.setVisibility(View.GONE);
+            activityPdfBinding.pbDownload.setVisibility(View.VISIBLE);
+        } else {
+            activityPdfBinding.btnPrevious.setVisibility(View.VISIBLE);
+            activityPdfBinding.btnNext.setVisibility(View.VISIBLE);
+            activityPdfBinding.pbDownload.setVisibility(View.GONE);
+        }
     }
 }

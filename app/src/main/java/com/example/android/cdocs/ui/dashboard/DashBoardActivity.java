@@ -72,7 +72,7 @@ public class DashBoardActivity extends BaseActivity
                 "Position : " + position + "Docs : " + item.getTitle(),
                 Toast.LENGTH_SHORT)
                 .show();
-        mPresenter.downloadFile(item);
+        //mPresenter.downloadFile(item);
         // Start PdfActivity to view pdf
         Intent intent = new Intent(DashBoardActivity.this, PdfActivity.class);
         intent.putExtra(IConstants.Pdf.KEY_PDF_DOCS, item);
