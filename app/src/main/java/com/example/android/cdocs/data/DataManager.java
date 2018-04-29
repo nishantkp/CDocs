@@ -1,6 +1,9 @@
 package com.example.android.cdocs.data;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.example.android.cdocs.data.local.DatabaseHelper;
 import com.example.android.cdocs.data.remote.ApiClient;
@@ -12,7 +15,11 @@ import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
+import io.reactivex.internal.observers.BasicFuseableObserver;
+import io.reactivex.internal.operators.flowable.FlowableOnBackpressureDrop;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -109,5 +116,29 @@ public class DataManager {
                 return sUtils.writeResponseBodyToDisk(responseBody, fileName);
             }
         }).subscribeOn(Schedulers.io()).subscribe();
+    }
+
+    /**
+     * Call this method to get the next page of pdf in form of bitmap
+     *
+     * @param docs Docs object in order to get the file name which helps to generate the correct
+     *             file path in internal directory
+     * @return Bitmap of a page
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public Bitmap getNextPage(Docs docs) {
+        return sUtils.getNextPage(docs);
+    }
+
+    /**
+     * Call this method to get the previous page of pdf in form of bitmap
+     *
+     * @param docs Docs object in order to get the file name which helps to generate the correct
+     *             file path in internal directory
+     * @return Bitmap of a page
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public Bitmap getPreviousPage(Docs docs) {
+        return sUtils.getPreviousPage(docs);
     }
 }

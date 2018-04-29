@@ -16,11 +16,14 @@ public class LoginPresenter extends BasePresenter<LoginContract.View>
 
     LoginPresenter(DataManager dataManager, Bundle bundle) {
         this.dataManager = dataManager;
-        if (bundle != null) {
+        // Check if the Key exists in the bundle or not in order to avoid adding null object to
+        // database
+        if (bundle != null && bundle.containsKey(IConstants.Fcm.KEY_FCM_MSG_TITLE)) {
             this.dataManager.insertSingleItemToDatabase(
                     new Docs(bundle.getString(IConstants.Fcm.KEY_FCM_MSG_TITLE),
                             bundle.getString(IConstants.Fcm.KEY_FCM_MSG_TYPE),
                             bundle.getString(IConstants.Fcm.KEY_FCM_MSG_URL)));
+
         }
     }
 
