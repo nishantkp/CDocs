@@ -9,4 +9,5 @@
     <!-- Button labels for PDF activity to view next and previous page -->
     <string name="previous_btn_label">Previous</string>
     <string name="next_btn_label">Next</string>
+    <string name="viewer_label">Viewer</string>
 </resources>

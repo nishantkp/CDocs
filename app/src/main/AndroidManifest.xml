@@ -61,8 +61,10 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
+        <!-- Activity to display PDF -->
         <activity
             android:name=".ui.pdf.PdfActivity"
+            android:label="@string/viewer_label"
             android:parentActivityName=".ui.dashboard.DashBoardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
