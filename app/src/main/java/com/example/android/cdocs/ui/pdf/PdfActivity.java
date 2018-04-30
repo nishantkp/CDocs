@@ -20,14 +20,13 @@ import static android.view.View.GONE;
 public class PdfActivity extends BaseActivity implements PdfContract.View {
 
     private ActivityPdfBinding activityPdfBinding;
-    private static Docs docs;
     private PdfPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityPdfBinding = DataBindingUtil.setContentView(this, R.layout.activity_pdf);
-        docs = getIntent().getParcelableExtra(IConstants.Pdf.KEY_PDF_DOCS);
+        Docs docs = getIntent().getParcelableExtra(IConstants.Pdf.KEY_PDF_DOCS);
         presenter = new PdfPresenter(mDataManager, docs);
         presenter.attachView(this);
         presenter.startDownload();
