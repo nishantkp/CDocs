@@ -38,7 +38,7 @@ public class DataManager {
 
     // Insert single item into database
     public void insertSingleItemToDatabase(Docs docs) {
-        sDatabaseHelper.inserSIngleItem(docs);
+        sDatabaseHelper.insertSingleItem(docs);
     }
 
     // Read data from database

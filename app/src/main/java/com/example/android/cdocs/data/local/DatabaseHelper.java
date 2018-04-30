@@ -42,7 +42,7 @@ public class DatabaseHelper {
      *
      * @param docs Docs object
      */
-    public void inserSIngleItem(Docs docs) {
+    public void insertSingleItem(Docs docs) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(IDatabase.IContentTable.DOCUMENT_TITLE, docs.getTitle());
         contentValues.put(IDatabase.IContentTable.TYPE, docs.getType());
