@@ -11,7 +11,6 @@ import android.support.annotation.RequiresApi;
 import com.example.android.cdocs.ui.model.Docs;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -117,9 +116,8 @@ public class Utils {
     private File getPublicFileStorageDir(String fileName) {
         // Get the directory for the user's public documents directory.
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            File file = new File(Environment.getExternalStoragePublicDirectory(
+            return new File(Environment.getExternalStoragePublicDirectory(
                     Environment.DIRECTORY_DOCUMENTS), fileName);
-            return file;
         }
         return new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOWNLOADS), fileName);
@@ -135,9 +133,7 @@ public class Utils {
         return new File(
                 baseFileLocation
                         + "/" + docs.getTitle() + ".pdf");
-
-
-    }
+        }
 
     /**
      * Used to get the Render of pdf, This method is not thread safe
