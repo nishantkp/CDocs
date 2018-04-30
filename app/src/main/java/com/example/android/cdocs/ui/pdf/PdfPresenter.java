@@ -50,7 +50,6 @@ public class PdfPresenter extends BasePresenter<PdfContract.View>
         } else {
             getView().loadPage(bitmap);
         }
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -74,9 +73,7 @@ public class PdfPresenter extends BasePresenter<PdfContract.View>
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
+                    public void onSubscribe(Disposable d) { }
 
                     @Override
                     public void onNext(final ResponseBody responseBody) {
@@ -90,14 +87,10 @@ public class PdfPresenter extends BasePresenter<PdfContract.View>
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Observer<Object>() {
                                     @Override
-                                    public void onSubscribe(Disposable d) {
-
-                                    }
+                                    public void onSubscribe(Disposable d) { }
 
                                     @Override
-                                    public void onNext(Object o) {
-
-                                    }
+                                    public void onNext(Object o) { }
 
                                     @Override
                                     public void onError(Throwable e) {
@@ -126,8 +119,7 @@ public class PdfPresenter extends BasePresenter<PdfContract.View>
                     }
 
                     @Override
-                    public void onComplete() {
-                    }
+                    public void onComplete() { }
                 });
     }
 }
