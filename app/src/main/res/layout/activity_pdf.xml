@@ -4,9 +4,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="presenter"
             type="com.example.android.cdocs.ui.pdf.PdfPresenter" />
+
+        <variable
+            name="status"
+            type="Boolean" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -32,7 +38,7 @@
                 android:layout_alignParentBottom="true"
                 android:onClick="@{()->presenter.getPreviousPage()}"
                 android:text="Previous"
-                android:visibility="gone" />
+                android:visibility="@{status ? View.VISIBLE : View.GONE}" />
 
             <Button
                 android:id="@+id/btn_next"
@@ -44,7 +50,7 @@
                 android:layout_alignParentRight="true"
                 android:onClick="@{()->presenter.getNextPage()}"
                 android:text="Next"
-                android:visibility="gone" />
+                android:visibility="@{status ? View.VISIBLE : View.GONE}" />
 
             <ProgressBar
                 android:id="@+id/pb_download"
@@ -52,7 +58,7 @@
                 android:layout_height="56dp"
                 android:layout_centerInParent="true"
                 android:indeterminate="true"
-                android:visibility="gone" />
+                android:visibility="@{status ? View.GONE : View.VISIBLE}" />
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

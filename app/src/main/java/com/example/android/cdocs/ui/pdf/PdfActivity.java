@@ -50,14 +50,6 @@ public class PdfActivity extends BaseActivity implements PdfContract.View {
 
     @Override
     public void downloadStatus(boolean status) {
-        if (!status) {
-            activityPdfBinding.btnPrevious.setVisibility(View.GONE);
-            activityPdfBinding.btnNext.setVisibility(View.GONE);
-            activityPdfBinding.pbDownload.setVisibility(View.VISIBLE);
-        } else {
-            activityPdfBinding.btnPrevious.setVisibility(View.VISIBLE);
-            activityPdfBinding.btnNext.setVisibility(View.VISIBLE);
-            activityPdfBinding.pbDownload.setVisibility(View.GONE);
-        }
+        activityPdfBinding.setStatus(status);
     }
 }
