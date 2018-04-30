@@ -1,6 +1,7 @@
 package com.example.android.cdocs.ui.pdf;
 
 import android.content.Context;
+import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.provider.ContactsContract;

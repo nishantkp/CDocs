@@ -28,24 +28,14 @@ public class PdfActivity extends BaseActivity implements PdfContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityPdfBinding = DataBindingUtil.setContentView(this, R.layout.activity_pdf);
+
         Docs docs = getIntent().getParcelableExtra(IConstants.Pdf.KEY_PDF_DOCS);
         presenter = new PdfPresenter(mDataManager, docs);
+
+        activityPdfBinding.setPresenter(presenter);
         presenter.attachView(this);
+
         presenter.startDownload();
-        activityPdfBinding.btnNext.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-                presenter.getNextPage();
-            }
-        });
-        activityPdfBinding.btnPrevious.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-                presenter.getPreviousPage();
-            }
-        });
     }
 
     @Override
