@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -53,7 +55,7 @@ public class PdfActivity extends BaseActivity implements PdfContract.View {
 
     @Override
     public void onError(String error) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+        Snackbar.make(activityPdfBinding.coordinatorLayoutPdf, error, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
