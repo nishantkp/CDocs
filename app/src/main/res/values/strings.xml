@@ -5,4 +5,8 @@
     <string name="com.twitter.sdk.android.CONSUMER_SECRET">uWClm5HieWgbxb1qVh2pNuE4Ff22jh3uoWJ1mbCK24Afbm5wUJ</string>
     <string name="dashboard_label">Dashboard</string>
     <string name="settings_logout_label">Logout</string>
+
+    <!-- Button labels for PDF activity to view next and previous page -->
+    <string name="previous_btn_label">Previous</string>
+    <string name="next_btn_label">Next</string>
 </resources>
