@@ -3,6 +3,7 @@ package com.example.android.cdocs.ui.dashboard;
 import com.example.android.cdocs.base.BasePresenter;
 import com.example.android.cdocs.data.DataManager;
 import com.example.android.cdocs.ui.model.Docs;
+import com.example.android.cdocs.utils.IConstants;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -32,6 +33,8 @@ public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
     @Override
     public void loadData() {
         getView().showData(dataManager.readDataFromDatabase());
+        getView().showUserName(
+                dataManager.readDataFromPreference(IConstants.Preference.KEY_USER_NAME_PREF));
     }
 
     @Override

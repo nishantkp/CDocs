@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -77,6 +78,14 @@ public class DashBoardActivity extends BaseActivity
     @Override
     public void showData(List<Docs> docsList) {
         mAdapter.swapData(docsList);
+    }
+
+    @Override
+    public void showUserName(String userName) {
+        Snackbar.make(activityDashBoardBinding.coordinatorLayoutDashboard,
+                "You are signed in as " + "@" + userName,
+                Snackbar.LENGTH_LONG)
+                .show();
     }
 
     @Override
