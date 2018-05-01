@@ -2,6 +2,7 @@ package com.example.android.cdocs.ui.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 public class Docs implements Parcelable {
     private final String title;
@@ -24,6 +25,10 @@ public class Docs implements Parcelable {
 
     public String getUrl() {
         return url;
+    }
+
+    public boolean isTypeAvailable() {
+        return !TextUtils.isEmpty(type);
     }
 
     @Override

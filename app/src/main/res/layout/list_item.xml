@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="item"
@@ -26,23 +29,38 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:maxLines="2"
                 android:text="@{item.title}"
-                android:textSize="16sp" />
+                android:textColor="#212121"
+                android:textSize="16sp"
+                tools:text="Think and Grow Rich" />
 
             <TextView
                 android:id="@+id/tv_file_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:padding="16dp"
+                android:background="@drawable/file_type_background"
+                android:fontFamily="sans-serif-light"
+                android:paddingBottom="8dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="8dp"
                 android:text="@{item.type}"
                 android:textAllCaps="true"
-                android:textSize="16sp" />
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp"
+                android:visibility="@{item.isTypeAvailable() ? View.VISIBLE : View.GONE}"
+                tools:text="pdf" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_info_outline_black_24px" />
+                android:paddingLeft="16dp"
+                android:paddingStart="16dp"
+                android:src="@drawable/ic_info_outline_black_24px"
+                tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
         <View
