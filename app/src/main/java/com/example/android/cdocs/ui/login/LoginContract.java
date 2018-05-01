@@ -5,6 +5,8 @@ import com.example.android.cdocs.base.MvpView;
 public interface LoginContract {
     interface View extends MvpView {
         void getUserDetails(String userName, String token);
+
+        void onLoginButtonClick();
     }
 
     interface Presenter {

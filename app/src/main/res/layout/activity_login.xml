@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="login"
+            type="com.example.android.cdocs.ui.login.LoginContract.View" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/login_background"
+        android:fitsSystemWindows="true"
         android:gravity="center">
 
-        <com.twitter.sdk.android.core.identity.TwitterLoginButton
-            android:id="@+id/btn_twitter_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/btn_login"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/twitter_logo_white_transparent" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="36dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="72dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/login_button_background"
+            android:fontFamily="sans-serif-light"
+            android:onClick="@{()->login.onLoginButtonClick()}"
+            android:text="@string/login_label"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 </layout>
