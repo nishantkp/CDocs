@@ -11,14 +11,21 @@ public interface DashBoardContract {
 
         void showUserName(String userName);
 
-        void loadBannerBitmap(String url);
+        interface DashboardImageLoaderCallback {
+            // called when banner starts downloading
+            void onBannerLoading();
+
+            // called when banner has successfully loaded
+            void onBannerReady();
+
+            // called when banner loading fails
+            void onBannerLoadError();
+        }
     }
 
     interface Presenter {
         void loadData();
 
         void logout();
-
-        void loadUserBanner();
     }
 }

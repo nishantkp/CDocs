@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
@@ -29,7 +30,9 @@ import com.example.android.cdocs.utils.IConstants;
 import java.util.List;
 
 public class DashBoardActivity extends BaseActivity
-        implements DocsAdapter.OnItemClickListener, DashBoardContract.View {
+        implements DocsAdapter.OnItemClickListener,
+        DashBoardContract.View,
+        DashBoardContract.View.DashboardImageLoaderCallback {
 
     private ActivityDashBoardBinding activityDashBoardBinding;
     private DashBoardPresenter mPresenter;
@@ -44,12 +47,13 @@ public class DashBoardActivity extends BaseActivity
                 DataBindingUtil.setContentView(this, R.layout.activity_dash_board);
 
         setSupportActionBar(activityDashBoardBinding.tbDashboard);
+        activityDashBoardBinding.setBannerCallback(this);
+
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle(R.string.dashboard_label);
 
         mPresenter = new DashBoardPresenter(mDataManager);
         mPresenter.attachView(this);
-        mPresenter.loadUserBanner();
         setRecyclerView();
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(IConstants.Fcm.ACTION_FCM_NOTIFICATION);
@@ -91,8 +95,19 @@ public class DashBoardActivity extends BaseActivity
     }
 
     @Override
-    public void loadBannerBitmap(String url) {
-        Glide.with(this).load(url).into(activityDashBoardBinding.imvDashboard);
+    public void onBannerLoading() {
+        activityDashBoardBinding.pgBanner.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onBannerReady() {
+        activityDashBoardBinding.pgBanner.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onBannerLoadError() {
+        activityDashBoardBinding.pgBanner.setVisibility(View.GONE);
+        activityDashBoardBinding.imvDashboard.setImageResource(R.drawable.login_background);
     }
 
     @Override

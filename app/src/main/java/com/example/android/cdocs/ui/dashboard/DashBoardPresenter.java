@@ -1,23 +1,23 @@
 package com.example.android.cdocs.ui.dashboard;
 
+import android.databinding.BindingAdapter;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
+import android.widget.ImageView;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.android.cdocs.base.BasePresenter;
 import com.example.android.cdocs.data.DataManager;
-import com.example.android.cdocs.ui.model.Docs;
 import com.example.android.cdocs.utils.IConstants;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.User;
-
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
         implements DashBoardContract.Presenter {
@@ -50,19 +50,37 @@ public class DashBoardPresenter extends BasePresenter<DashBoardContract.View>
         dataManager.logout();
     }
 
-    @Override
-    public void loadUserBanner() {
+    @BindingAdapter({"bind:callBack"})
+    public static void loadUserBanner(final ImageView view
+            , final DashBoardContract.View.DashboardImageLoaderCallback callback) {
+
+        callback.onBannerLoading();
+
         TwitterCore.getInstance().getApiClient().getAccountService().verifyCredentials(true, true, false)
                 .enqueue(new Callback<User>() {
                     @Override
                     public void success(Result<User> result) {
                         String url = result.data.profileBannerUrl;
-                        getView().loadBannerBitmap(url);
+                        Glide.with(view.getContext())
+                                .load(url)
+                                .listener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        callback.onBannerLoadError();
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        callback.onBannerReady();
+                                        return false;
+                                    }
+                                }).into(view);
                     }
 
                     @Override
                     public void failure(TwitterException exception) {
-
+                        callback.onBannerLoadError();
                     }
                 });
     }
