@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.android.cdocs.R;
 import com.example.android.cdocs.base.BaseActivity;
 import com.example.android.cdocs.databinding.ActivityDashBoardBinding;
@@ -48,6 +49,7 @@ public class DashBoardActivity extends BaseActivity
 
         mPresenter = new DashBoardPresenter(mDataManager);
         mPresenter.attachView(this);
+        mPresenter.loadUserBanner();
         setRecyclerView();
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(IConstants.Fcm.ACTION_FCM_NOTIFICATION);
@@ -86,6 +88,11 @@ public class DashBoardActivity extends BaseActivity
                 "You are signed in as " + "@" + userName,
                 Snackbar.LENGTH_LONG)
                 .show();
+    }
+
+    @Override
+    public void loadBannerBitmap(String url) {
+        Glide.with(this).load(url).into(activityDashBoardBinding.imvDashboard);
     }
 
     @Override

@@ -10,11 +10,15 @@ public interface DashBoardContract {
         void showData(List<Docs> docsList);
 
         void showUserName(String userName);
+
+        void loadBannerBitmap(String url);
     }
 
     interface Presenter {
         void loadData();
 
         void logout();
+
+        void loadUserBanner();
     }
 }
