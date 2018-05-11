@@ -19,7 +19,7 @@ import java.lang.ref.WeakReference;
 
 import okhttp3.ResponseBody;
 
-public class Utils {
+class Utils {
 
     private static Utils sUtils;
     // Weak Reference to avoid memory leaks
@@ -35,7 +35,7 @@ public class Utils {
      * @param context App Context
      * @return Utils object
      */
-    public static Utils getInstance(Context context) {
+    static Utils getInstance(Context context) {
         if (sUtils == null) {
             sUtils = new Utils();
             // weakReference = new WeakReference<>(context);
@@ -55,7 +55,7 @@ public class Utils {
      * @param fileName Name of the file
      * @return true if the file is saved into external file and false if it's not
      */
-    public boolean writeResponseBodyToDisk(ResponseBody body, String fileName) {
+    boolean writeResponseBodyToDisk(ResponseBody body, String fileName) {
         if (body == null) {
             return false;
         }
@@ -174,7 +174,7 @@ public class Utils {
      * @return Bitmap of previous page
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public Bitmap getPreviousPage(Docs docs) {
+    Bitmap getPreviousPage(Docs docs) {
         PdfRenderer pdfRenderer = getPage(docs);
         if (pdfRenderer == null) return null;
         pageCount = pageCount > 0 ? pageCount - 1 : 0;
@@ -194,7 +194,7 @@ public class Utils {
      * @return Bitmap of previous page
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public Bitmap getNextPage(Docs docs) {
+    Bitmap getNextPage(Docs docs) {
         PdfRenderer pdfRenderer = getPage(docs);
         if (pdfRenderer == null) return null;
         pageCount = pageCount < pdfRenderer.getPageCount() - 1 ? pageCount + 1 : pdfRenderer.getPageCount() - 1;
@@ -214,7 +214,7 @@ public class Utils {
      * @return Bitmap of a previous page
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public Bitmap getFirstPage(Docs docs) {
+    Bitmap getFirstPage(Docs docs) {
         PdfRenderer pdfRenderer = getPage(docs);
         if (pdfRenderer == null) return null;
         PdfRenderer.Page mCurrentPage = pdfRenderer.openPage(0);
